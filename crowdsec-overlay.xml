@@ -1,0 +1,20 @@
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+  <name><![CDATA[crowdsec-overlay]]></name>
+  <description lang="en"><![CDATA[Crowdsec gentoo overlay]]></description>
+  <homepage>https://git://github.com/crowdsec/crowdsec-overlay.git</homepage>
+  <owner type="person">
+    <email>tokiclover@gmail.com</email>
+    <name><![CDATA[tokiclover]]></name>
+  </owner>
+  <source type="git">git://github.com/crowdsec/crowdsec-overlay.git</source>
+  <source type="git">git://github.com/crowdsec/crowdsec-overlay.git</source>
+  <source type="git">https://git://github.com/crowdsec/crowdsec-overlay.git</source>
+  <source type="git">https://git://github.com/crowdsec/crowdsec-overlay.git</source>
+  <source type="git">git@git://github.com/crowdsec/crowdsec-overlay.git</source>
+  <source type="git">git@github.com:crowdsec/crowdsec-overlay.git</source>
+  <feed>git://github.com/crowdsec/crowdsec-overlay.gitcommits/master.atom</feed>
+  <feed>https:///commits/master.atom</feed>
+  </repo>
+</repositories>
