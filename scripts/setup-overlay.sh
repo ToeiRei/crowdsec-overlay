@@ -2,6 +2,7 @@
 
 # A script for setting up Portage to use a given github overlay
 # for us lazy people.
+# https://raw.githubusercontent.com/metafarion/metahax/master/setup-overlay.sh  , so good i had to swipe it.
 
 REPO_NAME="crowdsec-overlay" 
 AUTHOR="crowdsec"
