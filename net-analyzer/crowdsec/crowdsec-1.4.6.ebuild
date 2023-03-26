@@ -73,5 +73,5 @@ src_install() {
 	doins plugins/notifications/email/email.yaml
 
 	systemd_dounit "${FILESDIR}/${PN}.service"
-
+	newinitd "${FILESDIR}"/${PN}.openrc crowdsec
 }
