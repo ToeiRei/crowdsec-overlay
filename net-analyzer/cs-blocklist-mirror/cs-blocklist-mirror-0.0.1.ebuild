@@ -48,4 +48,5 @@ src_install() {
 
 	#Systemd unit
 	systemd_dounit "${FILESDIR}/${PN}.service"
+	newinitd "${FILESDIR}"/${PN}.openrc crowdsec-blocklist-mirror
 }
