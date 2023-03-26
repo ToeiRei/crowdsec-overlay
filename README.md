@@ -26,6 +26,6 @@ layman -s crowdsec-overlay
 Alternatively you can also add them by using eselect repository:
 ```
 eselect repository add crowdsec-overlay git git://github.com/ToeiRei/crowdsec-overlay
-emailt sync -r crowdsec-overlay
+emaint sync -r crowdsec-overlay
 ```
 
