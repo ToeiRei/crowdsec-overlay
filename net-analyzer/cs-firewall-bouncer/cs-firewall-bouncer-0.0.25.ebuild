@@ -8,6 +8,8 @@ inherit go-module systemd
 DESCRIPTION="The firewall bouncer for CrowdSec"
 HOMEPAGE="https://crowdsec.net"
 SRC_URI="https://github.com/crowdsecurity/cs-firewall-bouncer/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI+=" https://github.com/ToeiRei/crowdsec-vendor/releases/download/${PV}/${P}-vendor.tar.xz"
+
 RESTRICT="mirror"
 
 LICENSE="MIT"
@@ -19,8 +21,6 @@ DEPEND="
 	app-misc/jq
 "
 RDEPEND="${DEPEND}"
-
-RESTRICT="network-sandbox"
 
 src_prepare() {
 	eapply_user
