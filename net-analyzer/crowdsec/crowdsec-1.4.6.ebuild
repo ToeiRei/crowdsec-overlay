@@ -7,7 +7,10 @@ inherit go-module systemd
 
 DESCRIPTION="Crowdsec - An open-source, lightweight agent to detect and respond to bad behaviours. It also automatically benefits from our global community-wide IP reputation database"
 HOMEPAGE="https://crowdsec.net"
+
 SRC_URI="https://github.com/crowdsecurity/crowdsec/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI+=" https://github.com/ToeiRei/crowdsec-vendor/releases/download/${PV}/${P}-vendor.tar.xz"
+
 RESTRICT="mirror"
 
 LICENSE="MIT"
@@ -19,8 +22,6 @@ DEPEND="
 	app-misc/jq
 "
 RDEPEND="${DEPEND}"
-
-RESTRICT="network-sandbox"
 
 src_prepare() {
 	eapply_user
