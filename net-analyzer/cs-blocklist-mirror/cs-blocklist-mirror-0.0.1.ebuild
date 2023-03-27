@@ -8,6 +8,8 @@ inherit go-module systemd
 DESCRIPTION="CrowdSec Blocklist Mirror"
 HOMEPAGE="https://crowdsec.net"
 SRC_URI="https://github.com/crowdsecurity/cs-blocklist-mirror/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI+=" https://github.com/ToeiRei/crowdsec-vendor/releases/download/${PV}/${P}-vendor.tar.xz"
+
 RESTRICT="mirror"
 
 LICENSE="MIT"
@@ -20,7 +22,6 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-RESTRICT="network-sandbox"
 
 src_prepare() {
 	eapply_user
