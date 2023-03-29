@@ -1,0 +1,69 @@
+# Copyright 1999-2022 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+inherit unpacker systemd
+
+DESCRIPTION="Crowdsec (Binary)- An open-source, lightweight agent to detect and respond to bad behaviours. It also automatically benefits from our global community-wide IP reputation database"
+HOMEPAGE="https://crowdsec.net"
+
+# swipe some logic from resilio-sync-9999.ebuild as template uri handler   rob debs  
+# I would Preffer https://github.com/crowdsecurity/crowdsec/releases to have arm64/etc on thier GORELEASOR 
+# ie USE=bin get bin / if / else USE=SRC croudsec-bin/croudesec ebuild merging as could share logics.. more closely .. 
+#`QA_PREBUILT="usr/bin/${PN}" # add any other prebuild bins hear too..... 
+#http://ftp.us.debian.org/debian/pool/main/c/crowdsec/crowdsec__1.4.6-3__arm64.deb
+# http://ftp.us.debian.org/debian/pool/main/c/crowdsec/crowdsec__1.4.6-3__amd64.deb 
+#: http://ftp.us.debian.org/debian/pool/main/c/crowdsec/crowdsec_1.4.6-3_arm64.deb
+#http://ftp.us.debian.org/debian/pool/main/c/crowdsec/crowdsec__1.4.6-3__armhf.deb
+#
+BASE_URI="#http://ftp.us.debian.org/debian/pool/main/c/$PN/$PN_@$PV@arch@.deb
+###  test  case URI handeler 
+#
+#BASE_URI="https://download-cdn.resilio.com/stable/linux-@arch@/${PN}_@arch@.tar.gz"
+# unpack/unzip deb > @ /  
+# add any fixes chmod 755 +X as /where needed 
+## ensure depends are installed walla 
+SRC_URI="amd64? ( ${BASE_URI//@arch@/_amd64} )
+	arm? ( ${BASE_URI//@arch@/_armhf} )
+	arm64? ( ${BASE_URI//@arch@/_arm64} )
+	x86? ( ${BASE_URI//@arch@/_i386} )"`
+"
+
+RESTRICT="mirror strip"
+`QA_PREBUILT="usr/bin/${PN}" 
+`QA_PREBUILT="/usr/lib/crowdsec/plugins/notification-*"
+" # add any other prebuild bins hear too..... 
+
+LICENSE="MIT"
+SLOT="0"
+KEYWORDS="~amd64 ~x86 ~arm ~arm64"
+IUSE=""
+
+DEPEND="
+	app-misc/jq
+"
+RDEPEND="${DEPEND} !net-analyzer/crowdsec"
+# block croudesec SRC if using binaries /Collisions force proper uninstall/reinstall if user swaps.. 
+S="${WORKDIR}"
+
+
+src_install() {
+  unpack_deb $PN* /
+  into /
+	insinto /
+	doins -r .
+  ### most the dirs are done in debs however might need to Fix perms on files as needed uncpack deb to root fs 
+	# Main binaries 
+	#dobin cmd/crowdsec-cli/cscli
+	#dobin cmd/crowdsec/crowdsec
+
+  # units 
+	#systemd_dounit "${FILESDIR}/${PN}.service" deb has units 
+	newinitd "${FILESDIR}"/${PN}.openrc crowdsec
+}
+
+pkg_postinst() {
+	elog "net-analyzer/croudesec-bin has been installed "
+	elog "This is inteded to be low memory/Lgacy or embeded/IOT hardware and to secure them, compiling from SRC is typically preffered. "
+}
