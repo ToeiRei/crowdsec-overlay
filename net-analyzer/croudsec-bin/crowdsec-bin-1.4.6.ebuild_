@@ -31,7 +31,8 @@ SRC_URI="amd64? ( ${BASE_URI//@arch@/_amd64} )
 "
 
 RESTRICT="mirror strip"
-`QA_PREBUILT="usr/bin/${PN}" 
+`QA_PREBUILT="usr/bin/${PN}" "/usr/bin/cscli
+`QA_PREBUILT="/usr/bin/cscli"
 `QA_PREBUILT="/usr/lib/crowdsec/plugins/notification-*"
 " # add any other prebuild bins hear too..... 
 
