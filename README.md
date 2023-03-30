@@ -8,7 +8,7 @@ those ebuilds so the misisng go dependencies can be pulled in.
 ## Installation ##
 To use this overlay, download and run **[this setup script](https://raw.githubusercontent.com/Necrohol/crowdsec-overlay/main/scripts/setup-overlay.sh)**.
 
-Alternatively, you can place the [https://github.com/Necrohol/crowdsec-overlay/blob/main/crowdsec-overlay.conf](https://raw.githubusercontent.com/Necrohol/crowdsec-overlay/main/crowdsec-overlay.conf) file in `/etc/portage/repos.conf`, create the directory `/var/db/repos/metahax`, and run `emerge --sync`.
+Alternatively, you can place the [https://github.com/Necrohol/crowdsec-overlay/blob/main/crowdsec-overlay.conf](https://raw.githubusercontent.com/Necrohol/crowdsec-overlay/main/crowdsec-overlay.conf) file in `/etc/portage/repos.conf`, create the directory `/var/db/repos/crowdsec`, and run `emerge --sync`.
 
 ## Usage 
 To add the ebuilds you can use layman and add it to your config:
