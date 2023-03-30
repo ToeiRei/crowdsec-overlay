@@ -1,0 +1,39 @@
+name: Ebuild Maintain
+
+on:
+  repository_dispatch:
+  schedule:
+    - cron: "0 6 * * 1"
+
+jobs:
+  action-ebuild-maintain:
+    runs-on: ubuntu-latest
+    steps:
+    # Check out the repository
+    - uses: actions/checkout@master
+
+    # Prepare the environment
+    - name: Prepare
+      id: prepare
+      run: |
+        echo "::set-output name=datetime::$(date +"%Y%m%d%H%M")"
+        echo "::set-output name=workspace::${GITHUB_WORKSPACE}"
+        mkdir -p "${GITHUB_WORKSPACE}/distfiles" "${GITHUB_WORKSPACE}/binpkgs"
+
+    # Cache distfiles and binary packages
+    - name: Cache distfiles
+      id: cache-distfiles
+      uses: gerbal/always-cache@v1.0.3
+      with:
+        path: ${{ steps.prepare.outputs.workspace }}/distfiles
+        key: distfiles-${{ steps.prepare.outputs.datetime }}
+        restore-keys: |
+          distfiles-${{ steps.prepare.outputs.datetime }}
+          distfiles
+
+    # Run the ebuild keyword action
+    - uses: hacking-gentoo/action-ebuild-maintain@next
+      with:
+        auth_token: ${{ secrets.PR_TOKEN }}
+        deploy_key: ${{ secrets.DEPLOY_KEY }}
+        overlay_repo: hacking-actions/overlay-playground    
