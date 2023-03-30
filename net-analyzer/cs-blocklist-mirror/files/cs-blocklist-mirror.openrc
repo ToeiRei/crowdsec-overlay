@@ -1,0 +1,8 @@
+#!/sbin/openrc-run
+
+command="/usr/bin/crowdsec-blocklist-mirror"
+command_args="-c /etc/crowdsec/crowdsec-firewall-bouncer.yaml"
+pidfile=
+
+name="crowdsec-blocklist-mirror"
+description="CrowdSec Blocklist Mirror"
