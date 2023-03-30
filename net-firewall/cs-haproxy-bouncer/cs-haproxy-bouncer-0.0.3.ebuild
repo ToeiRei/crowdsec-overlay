@@ -20,6 +20,7 @@ IUSE=""
 DEPEND="
 	dev-lua/lua-cjson
 	dev-lua/luasocket
+	net-proxy/haproxy
 "
 RDEPEND="${DEPEND}
 	dev-lua/lua-apr"
