@@ -3,76 +3,53 @@
 
 EAPI=8
 
-inherit go-module systemd
+inherit unpacker systemd
 
-DESCRIPTION="Crowdsec - An open-source, lightweight agent to detect and respond to bad behaviours. It also automatically benefits from our global community-wide IP reputation database"
+DESCRIPTION="Crowdsec - An open-source, lightweight agent to detect and respond to bad behaviors. It also automatically benefits from our global community-wide IP reputation database."
 HOMEPAGE="https://crowdsec.net"
-SRC_URI="https://github.com/crowdsecurity/crowdsec/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
-RESTRICT="mirror"
+
+BASE_URI="http://ftp.us.debian.org/debian/pool/main/c/${PN}/${PN}_@PV@_@ARCH@.deb"
+
+SRC_URI="amd64? ( ${BASE_URI//@ARCH@/amd64} )
+         arm? ( ${BASE_URI//@ARCH@/armhf} )
+         arm64? ( ${BASE_URI//@ARCH@/arm64} )
+         x86? ( ${BASE_URI//@ARCH@/i386} )"
+
+RESTRICT="mirror strip"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
-IUSE="hardened"
+KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 
 DEPEND="
-	app-misc/jq
+    app-misc/jq
 "
-RDEPEND="${DEPEND}"
 
-RESTRICT="network-sandbox"
+RDEPEND="${DEPEND} !net-analyzer/crowdsec"
 
-src_prepare() {
-	eapply_user
-	# hack to get around their ROOT variable messing up ours
-	sed -i s/ROOT/MYROOT/g Makefile || die "Sed failed!"
+QA_PREBUILT="usr/bin/crowdsec
+             usr/bin/cscli
+             usr/lib/crowdsec/plugins/notification-*"
 
-}
-
-
-src_compile() {
-        export CGO_LDFLAGS="$(usex hardened '-fno-PIC ' '')"
-	export BUILD_VERSION=v${PVR}-gentoo-pragmatic
-	export BUILD_TAG=${PVR}
-	emake
-}
+S="${WORKDIR}"
 
 src_install() {
+    unpack_deb ${PN}* /
+    into /
 
-	# Main binaries
-	dobin cmd/crowdsec-cli/cscli
-	dobin cmd/crowdsec/crowdsec
+    # Fix permissions on files as needed
+    chmod 755 /usr/bin/crowdsec*
+    chmod 755 /usr/bin/cscli
+    chmod 755 /usr/lib/crowdsec/plugins/notification-*
 
-	# Wizard
-	exeinto /usr/share/crowdsec
-	doexe wizard.sh
+    # Install init script
+    newinitd "${FILESDIR}/${PN}.openrc" ${PN}
 
-	# Plugins
-	exeinto /usr/lib/crowdsec/plugins
-	doexe plugins/notifications/splunk/notification-splunk
-	doexe plugins/notifications/slack/notification-slack
-	doexe plugins/notifications/http/notification-http
-	doexe plugins/notifications/email/notification-email
+    # Install systemd unit
+    systemd_dounit "${FILESDIR}/${PN}.service"
+}
 
-	# Config yamls
-	insinto /etc/crowdsec
-	doins config/simulation.yaml
-	doins config/profiles.yaml
-	doins config/console.yaml
-	doins config/config.yaml
-
-	# Patterns
-	insinto /etc/crowdsec/patterns
-	doins config/patterns/*
-
-	# Notifications
-	insinto /etc/crowdsec/notifications
-	doins plugins/notifications/splunk/splunk.yaml
-	doins plugins/notifications/slack/slack.yaml
-	doins plugins/notifications/http/http.yaml
-	doins plugins/notifications/email/email.yaml
-
-	systemd_dounit "${FILESDIR}/${PN}.service"
-	newinitd "${FILESDIR}"/${PN}.openrc.in crowdsec
-
+pkg_postinst() {
+    elog "net-analyzer/crowdsec-bin has been installed."
+    elog "This is intended to be used on low memory, legacy, or embedded/IOT hardware to secure them. Compiling from source is typically preferred."
 }
