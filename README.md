@@ -12,7 +12,7 @@ To add the ebuilds you can use layman and add it to your config:
 ...
 overlays  :
     https://api.gentoo.org/overlays/repositories.xml
-    https://raw.githubusercontent.com/my-name/my-overlay/master/repositories.xml
+    https://raw.githubusercontent.com/ToeiRei/crowdsec-overlay/master/layman.txt
 ...
 ```
 
