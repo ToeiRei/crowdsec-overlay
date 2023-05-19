@@ -7,23 +7,8 @@ Due to the nature of go ebuilds and my lack of dealing with them, I had to circu
 those ebuilds so the misisng go dependencies can be pulled in.
 
 ## Usage 
-To add the ebuilds you can use layman and add it to your config:
-```
-...
-overlays  :
-    https://api.gentoo.org/overlays/repositories.xml
-    https://raw.githubusercontent.com/ToeiRei/crowdsec-overlay/master/layman.txt
-...
-```
+To add the ebuilds you can use eselect repository:
 
-and then use 
-```
-layman -F
-layman -a crowdsec-overlay
-layman -s crowdsec-overlay
-```
-
-Alternatively you can also add them by using eselect repository:
 ```
 eselect repository add crowdsec-overlay git git://github.com/ToeiRei/crowdsec-overlay
 emaint sync -r crowdsec-overlay
