@@ -10,7 +10,7 @@ those ebuilds so the misisng go dependencies can be pulled in.
 To add the ebuilds you can use eselect repository:
 
 ```
-eselect repository add crowdsec-overlay git git://github.com/ToeiRei/crowdsec-overlay
+eselect repository add crowdsec-overlay git https://github.com/ToeiRei/crowdsec-overlay
 emaint sync -r crowdsec-overlay
 ```
 
