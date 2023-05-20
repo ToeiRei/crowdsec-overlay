@@ -66,6 +66,9 @@ src_install() {
 	doins config/local_api_credentials.yaml
 	doins config/online_api_credentials.yaml
 
+	# create hub directory
+	dodir /etc/crowdsec/hub
+
 	# Patterns
 	insinto /etc/crowdsec/patterns
 	doins config/patterns/*
@@ -82,7 +85,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog "You will need to run /usr/share/crowdsec/wizard.sh before"
+	elog "You will need to run /usr/share/crowdsec/wizard.sh -d before"
 	elog "running crowdsec for the first time. For details, please see"
 	elog "https://docs.crowdsec.net/docs/user_guides/building/#using-the-wizard"
 }
