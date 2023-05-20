@@ -62,6 +62,7 @@ src_install() {
 	doins config/profiles.yaml
 	doins config/console.yaml
 	doins config/config.yaml
+	doins config/acquis.yaml
 
 	# Patterns
 	insinto /etc/crowdsec/patterns
