@@ -80,3 +80,9 @@ src_install() {
 	systemd_dounit "${FILESDIR}/${PN}.service"
 	newinitd "${FILESDIR}"/${PN}.openrc crowdsec
 }
+
+pkg_postinst() {
+	elog "You will need to run /usr/share/crowdsec/wizard.sh before"
+	elog "running crowdsec for the first time. For details, please see"
+	elog "https://docs.crowdsec.net/docs/user_guides/building/#using-the-wizard"
+}
