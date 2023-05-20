@@ -67,8 +67,7 @@ src_install() {
 	doins config/online_api_credentials.yaml
 
 	# create hub directory
-	dodir /etc/crowdsec/hub
-	default
+	keepdir /etc/crowdsec/hub
 
 	# Patterns
 	insinto /etc/crowdsec/patterns
