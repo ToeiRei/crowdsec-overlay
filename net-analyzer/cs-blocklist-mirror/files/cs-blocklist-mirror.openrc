@@ -1,8 +1,9 @@
 #!/sbin/openrc-run
 
 command="/usr/bin/crowdsec-blocklist-mirror"
-command_args="-c /etc/crowdsec/crowdsec-firewall-bouncer.yaml"
+command_args="-c /etc/crowdsec/crowdsec-blocklist-mirror.yaml"
 pidfile=
+supervisor="supervise-daemon"
 
 name="crowdsec-blocklist-mirror"
 description="CrowdSec Blocklist Mirror"
