@@ -80,12 +80,18 @@ src_install() {
 	doins plugins/notifications/http/http.yaml
 	doins plugins/notifications/email/email.yaml
 
+	# crowdsec db location
+	keepdir /var/lib/crowdsec/data
+
 	systemd_dounit "${FILESDIR}/${PN}.service"
 	newinitd "${FILESDIR}"/${PN}.openrc crowdsec
 }
 
 pkg_postinst() {
-	elog "You will need to run /usr/share/crowdsec/wizard.sh -d before"
-	elog "running crowdsec for the first time. For details, please see"
-	elog "https://docs.crowdsec.net/docs/user_guides/building/#using-the-wizard"
+	elog "Before running your crowdsec instance, you will need to:"
+	elog " - update the hub index: cscli hub update"
+	elog " - register your crowdsec to the local API: cscli machines add -a"
+	elog " - register at the central API: cscli capi register"
+	elog " - install essential configs: cscli collections install crowdsecurity/linux"
+        elog " - configure some datasources: https://docs.crowdsec.net/docs/data_sources/intro"
 }
