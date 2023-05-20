@@ -68,6 +68,7 @@ src_install() {
 
 	# create hub directory
 	dodir /etc/crowdsec/hub
+	default
 
 	# Patterns
 	insinto /etc/crowdsec/patterns
