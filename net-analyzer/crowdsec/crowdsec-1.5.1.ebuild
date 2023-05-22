@@ -62,6 +62,12 @@ src_install() {
 	doins config/profiles.yaml
 	doins config/console.yaml
 	doins config/config.yaml
+	doins config/acquis.yaml
+	doins config/local_api_credentials.yaml
+	doins config/online_api_credentials.yaml
+
+	# create hub directory
+	keepdir /etc/crowdsec/hub
 
 	# Patterns
 	insinto /etc/crowdsec/patterns
@@ -74,6 +80,18 @@ src_install() {
 	doins plugins/notifications/http/http.yaml
 	doins plugins/notifications/email/email.yaml
 
+	# crowdsec db location
+	keepdir /var/lib/crowdsec/data
+
 	systemd_dounit "${FILESDIR}/${PN}.service"
 	newinitd "${FILESDIR}"/${PN}.openrc crowdsec
+}
+
+pkg_postinst() {
+	elog "Before running your crowdsec instance, you will need to:"
+	elog " - update the hub index: cscli hub update"
+	elog " - register your crowdsec to the local API: cscli machines add -a"
+	elog " - register at the central API: cscli capi register"
+	elog " - install essential configs: cscli collections install crowdsecurity/linux"
+        elog " - configure some datasources: https://docs.crowdsec.net/docs/data_sources/intro"
 }

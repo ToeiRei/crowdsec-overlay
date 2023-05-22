@@ -12,25 +12,10 @@ Alternatively, you can place the [https://github.com/Necrohol/crowdsec-overlay/b
 *note this will update to github.com/crowdsec/crowdsec-overlay if the time comes. 
 
 ## Usage 
-To add the ebuilds you can use layman and add it to your config:
-```
-...
-overlays  :
-    https://api.gentoo.org/overlays/repositories.xml
-    https://raw.githubusercontent.com/ToeiRei/crowdsec-overlay/master/layman.txt
-...
-```
+To add the ebuilds you can use eselect repository:
 
-and then use 
 ```
-layman -F
-layman -a crowdsec-overlay
-layman -s crowdsec-overlay
-```
-
-Alternatively you can also add them by using eselect repository:
-```
-eselect repository add crowdsec-overlay git git://github.com/ToeiRei/crowdsec-overlay
+eselect repository add crowdsec-overlay git https://github.com/ToeiRei/crowdsec-overlay
 emaint sync -r crowdsec-overlay
 ```
 

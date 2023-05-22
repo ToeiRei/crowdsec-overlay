@@ -1,8 +1,9 @@
 #!/sbin/openrc-run
 
 command=/usr/bin/crowdsec-firewall-bouncer
-command_args="-c /etc/crowdsec/config.yaml"
+command_args="-c /etc/crowdsec/crowdsec-firewall-bouncer.yaml"
 pidfile=
+supervisor="supervise-daemon"
 
 name="crowdsec"
 description="Crowdsec firewall bouncer"
