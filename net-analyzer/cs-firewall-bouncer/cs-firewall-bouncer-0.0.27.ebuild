@@ -50,3 +50,11 @@ src_install() {
 	systemd_dounit "${FILESDIR}/${PN}.service"
 	newinitd "${FILESDIR}"/${PN}.openrc crowdsec-firewall-bouncer
 }
+
+pkg_postinst() {
+	elog "Before running your crowdsec firewall bouncer, you will need to:"
+	elog " - set the right firewall type in /etc/crowdsec/crowdsec-firewall-bouncer.yaml"
+	elog " - register the bouncer using: cscli bouncers add yourbouncername"
+	elog " - add the tables/chains as needed"
+	elog "See: https://docs.crowdsec.net/docs/bouncers/firewall#manual-installation"
+}

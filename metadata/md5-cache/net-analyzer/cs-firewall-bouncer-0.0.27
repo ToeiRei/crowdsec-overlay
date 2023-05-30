@@ -1,5 +1,5 @@
 BDEPEND=>=dev-lang/go-1.18 app-arch/unzip virtual/pkgconfig
-DEFINED_PHASES=compile install prepare unpack
+DEFINED_PHASES=compile install postinst prepare unpack
 DEPEND=app-misc/jq nftables? ( net-firewall/nftables[json] )
 DESCRIPTION=The firewall bouncer for CrowdSec
 EAPI=8
@@ -13,4 +13,4 @@ RESTRICT=mirror strip
 SLOT=0
 SRC_URI=https://github.com/crowdsecurity/cs-firewall-bouncer/archive/refs/tags/v0.0.27-freebsd.tar.gz -> cs-firewall-bouncer-0.0.27.tar.gz
 _eclasses_=multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	c19072c3cd7ac5cb21de013f7e9832e0	go-module	9c75e51a48520b2f01471c1f91762882	systemd	5f4bb0758df2e483babf68cd517078ca
-_md5_=b7a2ddad286db9e12c6622682a601fd9
+_md5_=3d64c3d57d00bf448cf9e53342e0c332
