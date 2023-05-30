@@ -2,7 +2,8 @@
 
 command=/usr/bin/crowdsec
 command_args="-c /etc/crowdsec/config.yaml"
-pidfile=
+pidfile="/run/$RC_SVCNAME/$RC_SVCNAME.pid"
+command_background="yes"
 
 name="crowdsec"
 description="Crowdsec agent"
