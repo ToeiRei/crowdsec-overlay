@@ -15,6 +15,17 @@ eselect repository add crowdsec-overlay git https://github.com/ToeiRei/crowdsec-
 emaint sync -r crowdsec-overlay
 ```
 
+if you do not want to use `eselect repository` you can add /etc/portage/repos.conf/crowdsec.conf
+
+```
+[crowdsec-overlay]
+location = /var/db/repos/crowdsec-overlay
+sync-type = git
+sync-uri = https://github.com/ToeiRei/crowdsec-overlay
+```
+
+and proceed with `emaint sync -r crowdsec-overlay`
+
 
 ## How to report bugs
 
