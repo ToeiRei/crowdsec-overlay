@@ -13,6 +13,6 @@
     <flag name="hardened">Builds <pkg>net-analyzer/crowdsec</pkg> for hardened.</flag>
   </use>
   <upstream>
-    <remote-id type="github">net-analyzer/crowdsec</remote-id>
+    <remote-id type="github">crowdsecurity/crowdsec</remote-id>
   </upstream>
 </pkgmetadata>
