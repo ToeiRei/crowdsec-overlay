@@ -7,6 +7,7 @@ Due to the nature of go ebuilds and my lack of dealing with them, I had to circu
 those ebuilds so the misisng go dependencies can be pulled in.
 
 ## Usage 
+
 To add the ebuilds you can use eselect repository:
 
 ```
@@ -14,3 +15,10 @@ eselect repository add crowdsec-overlay git https://github.com/ToeiRei/crowdsec-
 emaint sync -r crowdsec-overlay
 ```
 
+
+## How to report bugs
+
+If you happen to find any problems with my ebuilds, please check the following things before making a report:
+
+1. Is it a crowdsec problem? -> if yes, please report at their repository (https://github.com/crowdsecurity/crowdsec/issues)
+2. Are the freebsd sources available for a package? ->  If not, then I cannot update/make an ebuild without breaking out of the sandbox
