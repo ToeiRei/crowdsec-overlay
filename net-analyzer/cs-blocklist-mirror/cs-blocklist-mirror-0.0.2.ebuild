@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,7 +6,7 @@ EAPI=8
 inherit go-module systemd
 
 DESCRIPTION="CrowdSec Blocklist Mirror"
-HOMEPAGE="https://crowdsec.net"
+HOMEPAGE="https://www.crowdsec.net"
 SRC_URI="https://github.com/crowdsecurity/cs-blocklist-mirror/archive/refs/tags/v${PV}-freebsd.tar.gz -> ${P}.tar.gz"
 S=${WORKDIR}/${P}-freebsd
 

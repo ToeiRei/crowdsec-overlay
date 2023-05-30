@@ -9,7 +9,7 @@
     <flag name="hardened">Builds <pkg>net-analyzer/cs-blocklist-mirror</pkg> for hardened.</flag>
   </use>
   <upstream>
-    <remote-id type="github">net-analyzer/cs-blocklist-mirror</remote-id>
+    <remote-id type="github">crowdsecurity/cs-blocklist-mirror</remote-id>
   </upstream>
 </pkgmetadata>
 
