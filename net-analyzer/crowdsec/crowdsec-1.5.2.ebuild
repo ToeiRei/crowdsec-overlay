@@ -5,12 +5,11 @@ EAPI=8
 
 inherit go-module systemd
 
-DESCRIPTION="Crowdsec - An open-source, lightweight agent to detect and respond to bad behaviours. It also automatically benefits from our global community-wide IP reputation database"
+DESCRIPTION="An open-source agent to detect and respond to bad behaviours"
 HOMEPAGE="https://crowdsec.net"
 
 SRC_URI="https://github.com/crowdsecurity/crowdsec/archive/refs/tags/v${PV}-freebsd.tar.gz -> ${P}.tar.gz"
 S=${WORKDIR}/${P}-freebsd
-
 
 RESTRICT="mirror"
 
@@ -31,9 +30,8 @@ src_prepare() {
 
 }
 
-
 src_compile() {
-        export CGO_LDFLAGS="$(usex hardened '-fno-PIC ' '')"
+	export CGO_LDFLAGS="$(usex hardened '-fno-PIC ' '')"
 	export BUILD_VERSION=v${PVR}-gentoo-pragmatic
 	export BUILD_TAG=${PVR}
 	emake
@@ -93,5 +91,5 @@ pkg_postinst() {
 	elog " - register your crowdsec to the local API: cscli machines add -a"
 	elog " - register at the central API: cscli capi register"
 	elog " - install essential configs: cscli collections install crowdsecurity/linux"
-        elog " - configure some datasources: https://docs.crowdsec.net/docs/data_sources/intro"
+	elog " - configure some datasources: https://docs.crowdsec.net/docs/data_sources/intro"
 }
