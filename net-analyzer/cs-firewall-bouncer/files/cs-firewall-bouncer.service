@@ -5,8 +5,8 @@ Before=netfilter-persistent.service
 
 [Service]
 Type=notify
-ExecStart=/usr/bin/crowdsec -c /etc/crowdsec/crowdsec-firewall-bouncer.yaml
-ExecStartPre=/usr/bin/crowdsec -c /etc/crowdsec/crowdsec-firewall-bouncer.yaml -t
+ExecStart=/usr/bin/crowdsec-firewall-bouncer -c /etc/crowdsec/crowdsec-firewall-bouncer.yaml
+ExecStartPre=/usr/bin/crowdsec-firewall-bouncer -c /etc/crowdsec/crowdsec-firewall-bouncer.yaml -t
 ExecStartPost=/bin/sleep 0.1
 
 [Install]
