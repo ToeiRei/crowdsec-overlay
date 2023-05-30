@@ -9,6 +9,6 @@
     <flag name="hardened">Builds <pkg>net-analyzer/cs-firewall-bouncer</pkg> for hardened.</flag>
   </use>
   <upstream>
-    <remote-id type="github">net-analyzer/cs-firewall-bouncer</remote-id>
+    <remote-id type="github">crowdsecurity/cs-firewall-bouncer</remote-id>
   </upstream>
 </pkgmetadata>
