@@ -7,6 +7,7 @@
   </maintainer>
   <use>
     <flag name="hardened">Builds <pkg>net-analyzer/cs-firewall-bouncer</pkg> for hardened.</flag>
+    <flag name="nftables">Builds <pkg>net-analyzer/cs-firewall-bouncer</pkg> with nftables support.</flag>
   </use>
   <upstream>
     <remote-id type="github">crowdsecurity/cs-firewall-bouncer</remote-id>

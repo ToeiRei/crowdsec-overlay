@@ -15,10 +15,11 @@ RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="hardened"
+IUSE="hardened nftables"
 
 DEPEND="
 	app-misc/jq
+	nftables? ( net-firewall/nftables[json] )
 "
 RDEPEND="${DEPEND}"
 
