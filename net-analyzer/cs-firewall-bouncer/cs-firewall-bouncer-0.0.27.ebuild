@@ -10,8 +10,6 @@ HOMEPAGE="https://crowdsec.net"
 
 SRC_URI="https://github.com/crowdsecurity/cs-firewall-bouncer/archive/refs/tags/v${PV}-freebsd.tar.gz -> ${P}.tar.gz"
 S=${WORKDIR}/${P}-freebsd
-
-
 RESTRICT="mirror"
 
 LICENSE="MIT"
@@ -31,9 +29,8 @@ src_prepare() {
 
 }
 
-
 src_compile() {
-        export CGO_LDFLAGS="$(usex hardened '-fno-PIC ' '')"
+	export CGO_LDFLAGS="$(usex hardened '-fno-PIC ' '')"
 	export BUILD_VERSION=v${PVR}-gentoo-pragmatic
 	export BUILD_TAG=${PVR}
 	emake
