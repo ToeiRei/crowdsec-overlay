@@ -21,4 +21,4 @@ emaint sync -r crowdsec-overlay
 If you happen to find any problems with my ebuilds, please check the following things before making a report:
 
 1. Is it a crowdsec problem? -> if yes, please report at their repository (https://github.com/crowdsecurity/crowdsec/issues)
-2. Are the freebsd sources available for a package? ->  If not, then I cannot update/make an ebuild without breaking out of the sandbox. Feel free to ask around on discord.gg/crowdsec
+2. Are the freebsd sources available for a package? ->  If not, then I cannot update/make an ebuild without breaking out of the sandbox. Feel free to ask around on https://discord.gg/crowdsec
