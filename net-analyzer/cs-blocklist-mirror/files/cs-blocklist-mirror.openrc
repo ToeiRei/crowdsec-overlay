@@ -2,8 +2,13 @@
 
 command="/usr/bin/crowdsec-blocklist-mirror"
 command_args="-c /etc/crowdsec/crowdsec-blocklist-mirror.yaml"
-pidfile=
-supervisor="supervise-daemon"
-
+#pidfile=
 name="crowdsec-blocklist-mirror"
 description="CrowdSec Blocklist Mirror"
+command_background="yes"
+pidfile="/run/$RC_SVCNAME/$RC_SVCNAME.pid"
+
+start_pre () {
+  checkpath --directory --owner $command_user:$command_user --mode 0755 \
+  /run/$RC_SVCNAME
+}
