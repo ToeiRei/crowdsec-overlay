@@ -1,4 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
+  <maintainer type="person">
+    <email>crowdsec@stargazer.at</email>
+    <description>Viktoria Rei Bauer</description>
+  </maintainer>
+  <longdescription>
+     Crowdsec - An open-source, lightweight agent to detect and respond to bad behaviours.
+     It also automatically benefits from our global community-wide IP reputation database.
+  </longdescription>
+  <use>
+    <flag name="hardened">Builds <pkg>net-analyzer/crowdsec</pkg> for hardened.</flag>
+  </use>
   <upstream>
     <remote-id type="github">net-analyzer/crowdsec</remote-id>
   </upstream>
