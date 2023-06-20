@@ -1,7 +1,7 @@
 BDEPEND=>=dev-lang/go-1.18 app-arch/unzip virtual/pkgconfig
-DEFINED_PHASES=compile install prepare unpack
+DEFINED_PHASES=compile install postinst prepare unpack
 DEPEND=app-misc/jq
-DESCRIPTION=CrowdSec Blocklist Mirror
+DESCRIPTION=The AWS WAF bouncer for CrowdSec
 EAPI=8
 HOMEPAGE=https://www.crowdsec.net
 INHERIT=go-module systemd
@@ -11,6 +11,6 @@ LICENSE=MIT
 RDEPEND=app-misc/jq
 RESTRICT=mirror strip
 SLOT=0
-SRC_URI=https://github.com/crowdsecurity/cs-blocklist-mirror/archive/refs/tags/v0.0.2.tar.gz -> cs-blocklist-mirror-0.0.2.tar.gz https://github.com/crowdsecurity/cs-blocklist-mirror/releases/download/v0.0.2/vendor.tgz -> cs-blocklist-mirror-0.0.2-vendor.tar.gz
+SRC_URI=https://github.com/crowdsecurity/cs-aws-waf-bouncer/archive/refs/tags/v0.1.5.tar.gz -> cs-aws-waf-bouncer-0.1.5.tar.gz https://github.com/crowdsecurity/cs-aws-waf-bouncer/releases/download/v0.1.5/vendor.tgz -> cs-aws-waf-bouncer-0.1.5-vendor.tar.gz
 _eclasses_=multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multilib	c19072c3cd7ac5cb21de013f7e9832e0	go-module	8624eede24936fd7666e5298e5332f22	systemd	5f4bb0758df2e483babf68cd517078ca
-_md5_=de3240e290af891cc794e651b291b894
+_md5_=5058fc56d385291d045bc7622dc3a3ff

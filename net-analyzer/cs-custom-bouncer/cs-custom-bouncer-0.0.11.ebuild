@@ -50,9 +50,9 @@ src_install() {
 }
 
 pkg_postinst() {
-        elog "Before running your crowdsec custom bouncer, you will need to:"
-        elog " - check its configuration in /etc/crowdsec/crowdsec-custom-bouncer.yaml"
-        elog " - register the bouncer using: cscli bouncers add yourbouncername"
-        elog " - add your custom magic"
-        elog "See: https://docs.crowdsec.net/docs/bouncers/custom"
+	elog "Before running your crowdsec custom bouncer, you will need to:"
+	elog " - check its configuration in /etc/crowdsec/crowdsec-custom-bouncer.yaml"
+	elog " - register the bouncer using: cscli bouncers add yourbouncername"
+	elog " - add your custom magic"
+	elog "See: https://docs.crowdsec.net/docs/bouncers/custom"
 }

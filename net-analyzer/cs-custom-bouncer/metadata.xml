@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>crowdsec@stargazer.at</email>
+    <description>Viktoria Rei Bauer</description>
+  </maintainer>
+  <longdescription>
+Crowdsec bouncer written in golang for custom scripts.
+crowdsec-custom-bouncer will periodically fetch new and expired/removed decisions from 
+CrowdSec Local API and will pass them as arguments to a custom user script.
+  </longdescription>
+  <use>
+    <flag name="hardened">Builds <pkg>net-analyzer/cs-cloudflare-bouncer</pkg> for hardened.</flag>
+  </use>
+  <upstream>
+    <remote-id type="github">crowdsecurity/cs-cloudflare-bouncer</remote-id>
+  </upstream>
+</pkgmetadata>
