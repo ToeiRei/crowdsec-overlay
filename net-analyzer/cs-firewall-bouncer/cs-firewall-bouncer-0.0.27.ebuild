@@ -8,8 +8,9 @@ inherit go-module systemd
 DESCRIPTION="The firewall bouncer for CrowdSec"
 HOMEPAGE="https://www.crowdsec.net"
 
-SRC_URI="https://github.com/crowdsecurity/cs-firewall-bouncer/archive/refs/tags/v${PV}-freebsd.tar.gz -> ${P}.tar.gz"
-S=${WORKDIR}/${P}-freebsd
+SRC_URI="https://github.com/crowdsecurity/cs-firewall-bouncer/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI+=" https://github.com/crowdsecurity/cs-firewall-bouncer/releases/download/v${PV}/vendor.tgz -> ${P}-vendor.tar.gz"
+
 RESTRICT="mirror"
 
 LICENSE="MIT"
