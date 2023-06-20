@@ -48,3 +48,11 @@ src_install() {
 	systemd_dounit "${FILESDIR}/${PN}.service"
 	newinitd "${FILESDIR}"/${PN}.openrc crowdsec-custom-bouncer
 }
+
+pkg_postinst() {
+        elog "Before running your crowdsec custom bouncer, you will need to:"
+        elog " - check its configuration in /etc/crowdsec/crowdsec-custom-bouncer.yaml"
+        elog " - register the bouncer using: cscli bouncers add yourbouncername"
+        elog " - add your custom magic"
+        elog "See: https://docs.crowdsec.net/docs/bouncers/custom"
+}
