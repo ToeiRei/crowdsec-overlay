@@ -7,8 +7,8 @@ inherit go-module systemd
 
 DESCRIPTION="CrowdSec Blocklist Mirror"
 HOMEPAGE="https://www.crowdsec.net"
-SRC_URI="https://github.com/crowdsecurity/cs-blocklist-mirror/archive/refs/tags/v${PV}-freebsd.tar.gz -> ${P}.tar.gz"
-S=${WORKDIR}/${P}-freebsd
+SRC_URI="https://github.com/crowdsecurity/cs-blocklist-mirror/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI+=" https://github.com/crowdsecurity/cs-blocklist-mirror/releases/download/v${PV}/vendor.tgz -> ${P}-vendor.tar.gz"
 
 RESTRICT="mirror"
 
