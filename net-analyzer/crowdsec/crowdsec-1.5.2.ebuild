@@ -9,7 +9,7 @@ DESCRIPTION="An open-source agent to detect and respond to bad behaviours"
 HOMEPAGE="https://www.crowdsec.net"
 
 SRC_URI="https://github.com/crowdsecurity/crowdsec/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
-SRC_URI+=" https://github.com/crowdsecurity/crowdsec/releases/download/v${PV}/vendor.tgz -> ${P}-vendor.tar.gz"
+SRC_URI+=" https://github.com/crowdsecurity/crowdsec/releases/download/v${PV}/crowdsec-${PV}-vendor.tar.xz -> ${P}-vendor.tar.xz"
 
 RESTRICT="mirror"
 
