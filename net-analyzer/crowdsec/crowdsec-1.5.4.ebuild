@@ -46,7 +46,7 @@ src_install() {
 	doexe wizard.sh
 
 	# Plugins
-	exeinto /usr/lib/crowdsec/plugins
+	exeinto /usr/lib/crowdsec/cmd
 	doexe cmd/notification-splunk/notification-splunk
 	doexe cmd/notification-slack/notification-slack
 	doexe cmd/notification-http/notification-http
