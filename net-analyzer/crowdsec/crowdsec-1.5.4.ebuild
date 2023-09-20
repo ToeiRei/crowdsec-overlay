@@ -47,10 +47,10 @@ src_install() {
 
 	# Plugins
 	exeinto /usr/lib/crowdsec/cmd
-	doexe cmd/notification-splunk/notification-splunk
-	doexe cmd/notification-slack/notification-slack
-	doexe cmd/notification-http/notification-http
-	doexe cmd/notification-email/notification-email
+	doexe cmd/notification-splunk/notification-splunk/notification-splunk
+	doexe cmd/notification-slack/notification-slack/notification-slack
+	doexe cmd/notification-http/notification-http/notification-http
+	doexe cmd/notification-email/notification-email/notification-email
 
 	# Config yamls
 	insinto /etc/crowdsec
