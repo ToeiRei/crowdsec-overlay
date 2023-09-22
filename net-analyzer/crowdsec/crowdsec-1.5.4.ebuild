@@ -28,6 +28,11 @@ src_prepare() {
 	eapply_user
 }
 
+src_unpack() {
+    default
+    mv "${WORKDIR}/vendor" "${WORKDIR}/crowdsec-${PV}/"
+}
+
 src_compile() {
 	export CGO_LDFLAGS="$(usex hardened '-fno-PIC ' '')"
 	export BUILD_VERSION=v${PVR}-gentoo-pragmatic
