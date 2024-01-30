@@ -25,10 +25,14 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	eapply_user
-	# hack to get around their ROOT variable messing up ours
-	sed -i s/ROOT/MYROOT/g Makefile || die "Sed failed!"
 
 }
+
+src_unpack() {
+    default
+    mv "${WORKDIR}/vendor" "${WORKDIR}/cs-cloudflare-bouncer-${PV}/"
+}
+
 
 src_compile() {
 	export CGO_LDFLAGS="$(usex hardened '-fno-PIC ' '')"
