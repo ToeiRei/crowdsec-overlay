@@ -1,7 +1,8 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
+# net-analyzer/cs-haproxy-bouncer/cs-haproxy-bouncer-0.0.6.ebuild
 
-EAPI=7
+EAPI=8
 
 inherit lua
 
@@ -10,7 +11,7 @@ MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="CrowdSec bouncer module for HAProxy"
 HOMEPAGE="https://github.com/crowdsecurity/cs-haproxy-bouncer"
-SRC_URI="https://github.com/crowdsecurity/cs-haproxy-bouncer/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
+SRC_URI="https://github.com/crowdsecurity/cs-haproxy-bouncer/releases/download/v${PV}/crowdsec-haproxy-bouncer.tgz -> ${MY_P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

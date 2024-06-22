@@ -1,8 +1,0 @@
-#!/sbin/openrc-run
-
-command="crowdsec-firewall-bouncer"
-command_args="-c ${CFG}crowdsec-firewall-bouncer.yaml"
-pidfile=
-
-name="crowdsec-firewall-bouncer"
-description="The firewall bouncer for CrowdSec"

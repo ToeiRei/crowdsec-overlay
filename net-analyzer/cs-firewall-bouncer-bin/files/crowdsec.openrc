@@ -1,8 +1,0 @@
-#!/sbin/openrc-run
-
-command=/usr/local/bin/crowdsec
-command_args="-c /etc/crowdsec/config.yaml"
-pidfile=
-
-name="crowdsec"
-description="Crowdsec agent"
