@@ -1,15 +1,15 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 inherit go-module systemd
 
-DESCRIPTION="Crowdsec - An open-source, lightweight agent to detect and respond to bad behaviours. It also automatically benefits from our global community-wide IP reputation database"
-HOMEPAGE="https://crowdsec.net"
+DESCRIPTION="An open-source agent to detect and respond to bad behaviours"
+HOMEPAGE="https://www.crowdsec.net"
 
-SRC_URI="https://github.com/crowdsecurity/crowdsec/archive/refs/tags/v${PV}-freebsd.tar.gz -> ${P}.tar.gz"
-S=${WORKDIR}/${P}-freebsd
+SRC_URI="https://github.com/crowdsecurity/crowdsec/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI+=" https://github.com/crowdsecurity/crowdsec/releases/download/v${PV}/vendor.tgz -> ${P}-vendor.tar.gz"
 
 
 RESTRICT="mirror"
@@ -20,20 +20,22 @@ KEYWORDS="~amd64"
 IUSE="hardened"
 
 DEPEND="
-	app-misc/jq
+        dev-libs/re2
 "
 RDEPEND="${DEPEND}"
 
+
 src_prepare() {
 	eapply_user
-	# hack to get around their ROOT variable messing up ours
-	sed -i s/ROOT/MYROOT/g Makefile || die "Sed failed!"
-
 }
 
+src_unpack() {
+    default
+    mv "${WORKDIR}/vendor" "${WORKDIR}/crowdsec-${PV}/"
+}
 
 src_compile() {
-        export CGO_LDFLAGS="$(usex hardened '-fno-PIC ' '')"
+	export CGO_LDFLAGS="$(usex hardened '-fno-PIC ' '')"
 	export BUILD_VERSION=v${PVR}-gentoo-pragmatic
 	export BUILD_TAG=${PVR}
 	emake
@@ -50,11 +52,11 @@ src_install() {
 	doexe wizard.sh
 
 	# Plugins
-	exeinto /usr/lib/crowdsec/plugins
-	doexe plugins/notifications/splunk/notification-splunk
-	doexe plugins/notifications/slack/notification-slack
-	doexe plugins/notifications/http/notification-http
-	doexe plugins/notifications/email/notification-email
+	exeinto /usr/lib/crowdsec/cmd
+	doexe cmd/notification-splunk/notification-splunk
+	doexe cmd/notification-slack/notification-slack
+	doexe cmd/notification-http/notification-http
+	doexe cmd/notification-email/notification-email
 
 	# Config yamls
 	insinto /etc/crowdsec
@@ -68,6 +70,7 @@ src_install() {
 
 	# create hub directory
 	keepdir /etc/crowdsec/hub
+	keepdir /etc/crowdsec/context
 
 	# Patterns
 	insinto /etc/crowdsec/patterns
@@ -75,10 +78,10 @@ src_install() {
 
 	# Notifications
 	insinto /etc/crowdsec/notifications
-	doins plugins/notifications/splunk/splunk.yaml
-	doins plugins/notifications/slack/slack.yaml
-	doins plugins/notifications/http/http.yaml
-	doins plugins/notifications/email/email.yaml
+	doins cmd/notification-splunk/splunk.yaml
+	doins cmd/notification-slack/slack.yaml
+	doins cmd/notification-http/http.yaml
+	doins cmd/notification-email/email.yaml
 
 	# crowdsec db location
 	keepdir /var/lib/crowdsec/data
@@ -93,5 +96,5 @@ pkg_postinst() {
 	elog " - register your crowdsec to the local API: cscli machines add -a"
 	elog " - register at the central API: cscli capi register"
 	elog " - install essential configs: cscli collections install crowdsecurity/linux"
-        elog " - configure some datasources: https://docs.crowdsec.net/docs/data_sources/intro"
+	elog " - configure some datasources: https://docs.crowdsec.net/docs/data_sources/intro"
 }

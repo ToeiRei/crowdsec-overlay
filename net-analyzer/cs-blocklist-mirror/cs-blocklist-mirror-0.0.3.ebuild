@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,10 +6,9 @@ EAPI=8
 inherit go-module systemd
 
 DESCRIPTION="CrowdSec Blocklist Mirror"
-HOMEPAGE="https://crowdsec.net"
-SRC_URI="https://github.com/crowdsecurity/cs-blocklist-mirror/archive/refs/tags/v${PV}-freebsd.tar.gz -> ${P}.tar.gz"
-S=${WORKDIR}/${P}-freebsd
-
+HOMEPAGE="https://www.crowdsec.net"
+SRC_URI="https://github.com/crowdsecurity/cs-blocklist-mirror/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI+=" https://github.com/crowdsecurity/cs-blocklist-mirror/releases/download/v${PV}/vendor.tgz -> ${P}-vendor.tar.gz"
 
 RESTRICT="mirror"
 
@@ -23,24 +22,24 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-
 src_prepare() {
 	eapply_user
-	# hack to get around their ROOT variable messing up ours
-	sed -i s/ROOT/MYROOT/g Makefile || die "Sed failed!"
+}
 
+src_unpack() {
+    default
+    mv "${WORKDIR}/vendor" "${WORKDIR}/cs-blocklist-mirror-${PV}/"
 }
 
 
 src_compile() {
-        export CGO_LDFLAGS="$(usex hardened '-fno-PIC ' '')"
+	export CGO_LDFLAGS="$(usex hardened '-fno-PIC ' '')"
 	export BUILD_VERSION=v${PVR}-gentoo-pragmatic
 	export BUILD_TAG=${PVR}
 	emake
 }
 
 src_install() {
-
 	# Main binaries
 	dobin crowdsec-blocklist-mirror
 

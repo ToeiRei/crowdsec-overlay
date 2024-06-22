@@ -1,10 +1,10 @@
 #!/sbin/openrc-run
 
-command="/usr/bin/crowdsec-blocklist-mirror"
-command_args="-c /etc/crowdsec/crowdsec-blocklist-mirror.yaml"
+command=/usr/bin/cs-custom-bouncer
+command_args="-c /etc/crowdsec/crowdsec-custom-bouncer.yaml"
 #pidfile=
-name="crowdsec-blocklist-mirror"
-description="CrowdSec Blocklist Mirror"
+name="crowdsec"
+description="Crowdsec custom bouncer"
 command_background="yes"
 pidfile="/run/$RC_SVCNAME/$RC_SVCNAME.pid"
 

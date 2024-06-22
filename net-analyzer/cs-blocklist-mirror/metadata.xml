@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>crowdsec@stargazer.at</email>
+    <description>Viktoria Rei Bauer</description>
+  </maintainer>
+  <use>
+    <flag name="hardened">Builds <pkg>net-analyzer/cs-blocklist-mirror</pkg> for hardened.</flag>
+  </use>
+  <upstream>
+    <remote-id type="github">crowdsecurity/cs-blocklist-mirror</remote-id>
+  </upstream>
+</pkgmetadata>
+

@@ -1,0 +1,16 @@
+BDEPEND=>=dev-lang/go-1.18 app-arch/unzip virtual/pkgconfig
+DEFINED_PHASES=compile install postinst prepare unpack
+DEPEND=app-misc/jq nftables? ( net-firewall/nftables[json] )
+DESCRIPTION=The firewall bouncer for CrowdSec
+EAPI=8
+HOMEPAGE=https://www.crowdsec.net
+INHERIT=go-module systemd
+IUSE=hardened nftables
+KEYWORDS=~amd64
+LICENSE=MIT
+RDEPEND=app-misc/jq nftables? ( net-firewall/nftables[json] )
+RESTRICT=mirror strip
+SLOT=0
+SRC_URI=https://github.com/crowdsecurity/cs-firewall-bouncer/archive/refs/tags/v0.0.27.tar.gz -> cs-firewall-bouncer-0.0.27.tar.gz https://github.com/crowdsecurity/cs-firewall-bouncer/releases/download/v0.0.27/vendor.tgz -> cs-firewall-bouncer-0.0.27-vendor.tar.gz
+_eclasses_=multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multilib	c19072c3cd7ac5cb21de013f7e9832e0	go-module	8624eede24936fd7666e5298e5332f22	systemd	5f4bb0758df2e483babf68cd517078ca
+_md5_=f5e8d6491a6e3021ad520d43f8fdf835

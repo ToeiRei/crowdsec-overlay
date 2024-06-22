@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>crowdsec@stargazer.at</email>
+    <description>Viktoria Rei Bauer</description>
+  </maintainer>
+  <longdescription>
+A bouncer that syncs the decisions made by CrowdSec with CloudFlare's firewall.
+Manages multi user, multi account, multi zone setup. Supports IP, Country and AS scoped decisions.
+  </longdescription>
+  <use>
+    <flag name="hardened">Builds <pkg>net-analyzer/cs-cloudflare-bouncer</pkg> for hardened.</flag>
+  </use>
+  <upstream>
+    <remote-id type="github">crowdsecurity/cs-cloudflare-bouncer</remote-id>
+  </upstream>
+</pkgmetadata>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>crowdsec@stargazer.at</email>
+    <description>Viktoria Rei Bauer</description>
+  </maintainer>
+  <use>
+    <flag name="hardened">Builds <pkg>net-analyzer/cs-firewall-bouncer</pkg> for hardened.</flag>
+    <flag name="nftables">Builds <pkg>net-analyzer/cs-firewall-bouncer</pkg> with nftables support.</flag>
+  </use>
+  <upstream>
+    <remote-id type="github">crowdsecurity/cs-firewall-bouncer</remote-id>
+  </upstream>
+</pkgmetadata>
