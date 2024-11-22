@@ -21,6 +21,7 @@ IUSE="hardened"
 
 DEPEND="
         dev-libs/re2
+	>=dev-lang/go-1.23.3
 "
 RDEPEND="${DEPEND}"
 
