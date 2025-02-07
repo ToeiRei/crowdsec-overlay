@@ -11,7 +11,6 @@ HOMEPAGE="https://www.crowdsec.net"
 SRC_URI="https://github.com/crowdsecurity/crowdsec/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 SRC_URI+=" https://github.com/crowdsecurity/crowdsec/releases/download/v${PV}/vendor.tgz -> ${P}-vendor.tar.gz"
 
-
 RESTRICT="mirror"
 
 LICENSE="MIT"
@@ -21,7 +20,7 @@ IUSE="hardened"
 
 DEPEND="
         dev-libs/re2
-	>=dev-lang/go-1.23.3
+	>=dev-lang/go-1.23.6
 "
 RDEPEND="${DEPEND}"
 
