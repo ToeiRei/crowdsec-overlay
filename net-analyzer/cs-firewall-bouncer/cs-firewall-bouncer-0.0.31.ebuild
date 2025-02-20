@@ -37,7 +37,7 @@ src_compile() {
 	export CGO_LDFLAGS="$(usex hardened '-fno-PIC ' '')"
 	export BUILD_VERSION=v${PVR}-gentoo-pragmatic
 	export BUILD_TAG=${PVR}
-	emake
+	emake -j1
 }
 
 src_install() {
