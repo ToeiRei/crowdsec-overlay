@@ -44,7 +44,7 @@ src_compile() {
 src_install() {
 
 	# Main binaries
-	dobin crowdsec-firewall-bouncer
+	dobin crowdsec-cloudflare-bouncer
 
 	# Config yamls
 	insinto /etc/crowdsec
