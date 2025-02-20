@@ -48,7 +48,7 @@ src_install() {
 
 	# Config yamls
 	insinto /etc/crowdsec
-	doins config/crowdsec-firewall-bouncer.yaml
+	doins config/crowdsec-cloudflare-bouncer.yaml
 
 	#Systemd unit
 	systemd_dounit "${FILESDIR}/${PN}.service"
