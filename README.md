@@ -36,11 +36,4 @@ If you happen to find any problems with my ebuilds, please check the following t
 
 ## Known issues
 
-### Due to go and its library handling, you may see messages like the following for missing dependencies. (should be fixed by now)
-~~```go: ariga.io/atlas@v0.7.2-0.20220927111110-867ee0cca56a: Get "https://proxy.golang.org/ariga.io/atlas/@v/v0.7.2-0.20220927111110-867ee0cca56a.mod": dial tcp: lookup proxy.golang.org on 1.1.1.1:53: dial udp 1.1.1.1:53: connect: network is unreachable```~~
-
-~~TL;DR: Solution for now is to use `FEATURES="-network-sandbox"` to build those packages.~~
-
-~~Longer explanation: You have to make a 'vendor tarball' that has all of the dependencies (go mod vendor) and package those up. Interestinly this does **not** give us all of the required dependencies, and this is why Gentoo is complaining about missing files.
-This is something we're still in the process of figuring out on why that's happening. Solution for now is to use `FEATURES="-network-sandbox"` to allow portage to download packages while building - circumventing the no-network part of the sandbox, allowing go to download the missing libraries - allowing you to build those packages.~~
-
+### You tell me.
