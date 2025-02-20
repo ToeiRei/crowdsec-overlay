@@ -41,7 +41,7 @@ src_compile() {
 
 src_install() {
 	# Main binaries
-	dobin crowdsec--custom-bouncer
+	dobin crowdsec-custom-bouncer
 
 	# Config yamls
 	insinto /etc/crowdsec
