@@ -21,7 +21,7 @@ IUSE="hardened"
 DEPEND="
         dev-libs/re2
 	>=dev-lang/go-1.23.6
-        =<dev-cpp/abseil-cpp-20250814.1
+        <=dev-cpp/abseil-cpp-20250814.1
 "
 RDEPEND="${DEPEND}"
 
