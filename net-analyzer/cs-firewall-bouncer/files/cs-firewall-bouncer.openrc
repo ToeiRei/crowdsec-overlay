@@ -35,5 +35,6 @@ checkconfig() {
 # The bouncer's -t option initializes its firewall backend. Run it only from
 # start_pre, after any previous bouncer process has stopped.
 start_pre() {
+	rm -f "${RC_SVCDIR}/supervise-${RC_SVCNAME}.sock" || return 1
 	checkconfig
 }
