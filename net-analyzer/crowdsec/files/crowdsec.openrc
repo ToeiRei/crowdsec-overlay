@@ -1,14 +1,47 @@
 #!/sbin/openrc-run
 
-command=/usr/bin/crowdsec
-command_args="-c /etc/crowdsec/config.yaml"
-#pidfile=
 name="crowdsec"
-description="Crowdsec agent"
-command_background="yes"
-pidfile="/run/$RC_SVCNAME/$RC_SVCNAME.pid"
+description="CrowdSec agent"
 
-start_pre () {
-  checkpath --directory --owner $command_user:$command_user --mode 0755 \
-  /run/$RC_SVCNAME
+crowdsec_config="${crowdsec_config:-/etc/crowdsec/config.yaml}"
+
+command="/usr/bin/crowdsec"
+command_args="-c ${crowdsec_config}"
+command_background=true
+pidfile="/run/${RC_SVCNAME}.pid"
+notify="socket:ready"
+required_files="${crowdsec_config}"
+
+extra_commands="checkconfig"
+extra_started_commands="reload"
+description_checkconfig="Validate the CrowdSec configuration"
+description_reload="Reload the CrowdSec configuration"
+
+depend() {
+	need localmount
+}
+
+checkconfig() {
+	ebegin "Checking CrowdSec configuration"
+	"${command}" -c "${crowdsec_config}" -t
+	eend $?
+}
+
+start_pre() {
+	if [ "${RC_CMD}" != "restart" ]; then
+		checkconfig
+	fi
+}
+
+stop_pre() {
+	if [ "${RC_CMD}" = "restart" ]; then
+		checkconfig
+	fi
+}
+
+reload() {
+	checkconfig || return $?
+	ebegin "Reloading CrowdSec configuration"
+	start-stop-daemon --signal HUP --pidfile "${pidfile}"
+	eend $?
 }

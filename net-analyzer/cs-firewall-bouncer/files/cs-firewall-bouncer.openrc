@@ -1,14 +1,39 @@
 #!/sbin/openrc-run
 
-command=/usr/bin/crowdsec-firewall-bouncer
-command_args="-c /etc/crowdsec/crowdsec-firewall-bouncer.yaml"
-#pidfile=
-name="crowdsec"
-description="Crowdsec firewall bouncer"
-command_background="yes"
-pidfile="/run/$RC_SVCNAME/$RC_SVCNAME.pid"
+name="CrowdSec firewall bouncer"
+description="CrowdSec firewall bouncer"
 
-start_pre () {
-  checkpath --directory --owner $command_user:$command_user --mode 0755 \
-  /run/$RC_SVCNAME
+bouncer_config="${bouncer_config:-/etc/crowdsec/crowdsec-firewall-bouncer.yaml}"
+lapi_init_service="${lapi_init_service:-crowdsec}"
+firewall_init_service="${firewall_init_service:-nftables}"
+
+command="/usr/bin/crowdsec-firewall-bouncer"
+command_args="-c ${bouncer_config}"
+command_background=true
+pidfile="/run/${RC_SVCNAME}.pid"
+notify="socket:ready"
+required_files="${bouncer_config}"
+
+extra_commands="checkconfig"
+description_checkconfig="Validate the CrowdSec firewall bouncer configuration"
+
+depend() {
+	if [ "${lapi_init_service}" != "none" ]; then
+		need "${lapi_init_service}"
+	fi
+	if [ "${firewall_init_service}" != "none" ]; then
+		use "${firewall_init_service}"
+	fi
+}
+
+checkconfig() {
+	ebegin "Checking CrowdSec firewall bouncer configuration"
+	"${command}" -c "${bouncer_config}" -t
+	eend $?
+}
+
+# The bouncer's -t option initializes its firewall backend. Run it only from
+# start_pre, after any previous bouncer process has stopped.
+start_pre() {
+	checkconfig
 }
