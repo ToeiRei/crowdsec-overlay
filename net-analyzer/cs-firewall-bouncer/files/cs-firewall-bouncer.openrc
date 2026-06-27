@@ -4,6 +4,7 @@ name="CrowdSec firewall bouncer"
 description="CrowdSec firewall bouncer"
 
 bouncer_config="${bouncer_config:-/etc/crowdsec/crowdsec-firewall-bouncer.yaml}"
+lapi_init_service="${lapi_init_service:-crowdsec}"
 firewall_init_service="${firewall_init_service:-nftables}"
 
 command="/usr/bin/crowdsec-firewall-bouncer"
@@ -17,7 +18,9 @@ extra_commands="checkconfig"
 description_checkconfig="Validate the CrowdSec firewall bouncer configuration"
 
 depend() {
-	need crowdsec
+	if [ "${lapi_init_service}" != "none" ]; then
+		need "${lapi_init_service}"
+	fi
 	if [ "${firewall_init_service}" != "none" ]; then
 		use "${firewall_init_service}"
 	fi
