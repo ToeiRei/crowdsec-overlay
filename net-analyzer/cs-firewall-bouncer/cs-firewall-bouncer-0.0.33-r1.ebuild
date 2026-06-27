@@ -14,7 +14,7 @@ SRC_URI+=" https://github.com/crowdsecurity/cs-firewall-bouncer/releases/downloa
 LICENSE="MIT"
 
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm64"
 IUSE="hardened nftables"
 
 RESTRICT="mirror"
