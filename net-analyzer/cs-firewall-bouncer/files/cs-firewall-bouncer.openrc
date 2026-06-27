@@ -1,9 +1,10 @@
 #!/sbin/openrc-run
 
-name="crowdsec-firewall-bouncer"
+name="CrowdSec firewall bouncer"
 description="CrowdSec firewall bouncer"
 
 bouncer_config="${bouncer_config:-/etc/crowdsec/crowdsec-firewall-bouncer.yaml}"
+firewall_init_service="${firewall_init_service:-nftables}"
 
 command="/usr/bin/crowdsec-firewall-bouncer"
 command_args="-c ${bouncer_config}"
@@ -17,7 +18,9 @@ description_checkconfig="Validate the CrowdSec firewall bouncer configuration"
 
 depend() {
 	need crowdsec
-	use nftables
+	if [ "${firewall_init_service}" != "none" ]; then
+		use "${firewall_init_service}"
+	fi
 }
 
 checkconfig() {
