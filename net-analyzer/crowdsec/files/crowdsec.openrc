@@ -1,6 +1,6 @@
 #!/sbin/openrc-run
 
-name="crowdsec"
+name="CrowdSec"
 description="CrowdSec agent"
 
 crowdsec_config="${crowdsec_config:-/etc/crowdsec/config.yaml}"
@@ -28,6 +28,7 @@ checkconfig() {
 }
 
 start_pre() {
+	rm -f "${RC_SVCDIR}/supervise-${RC_SVCNAME}.sock" || return 1
 	if [ "${RC_CMD}" != "restart" ]; then
 		checkconfig
 	fi
