@@ -1,0 +1,8 @@
+--- a/vendor/github.com/wasilibs/go-re2/internal/cre2/cre2.cpp
++++ b/vendor/github.com/wasilibs/go-re2/internal/cre2/cre2.cpp
+@@ -20,6 +20,7 @@
+
+ #include <cstdlib>
+ #include <cstdio>
++#include <cstring>
+ #include <vector>
