@@ -1,0 +1,16 @@
+BDEPEND=>=dev-lang/go-1.24.11:= app-arch/unzip virtual/pkgconfig
+DEFINED_PHASES=compile install postinst prepare unpack
+DEPEND=dev-libs/re2 >=dev-lang/go-1.23.6
+DESCRIPTION=An open-source agent to detect and respond to bad behaviours
+EAPI=8
+HOMEPAGE=https://www.crowdsec.net
+INHERIT=go-module systemd
+IUSE=hardened
+KEYWORDS=~amd64 ~arm64
+LICENSE=MIT
+RDEPEND=dev-libs/re2 >=dev-lang/go-1.23.6
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://github.com/crowdsecurity/crowdsec/archive/refs/tags/v1.7.8.tar.gz -> crowdsec-1.7.8.tar.gz https://github.com/crowdsecurity/crowdsec/releases/download/v1.7.8/vendor.tgz -> crowdsec-1.7.8-vendor.tar.gz
+_eclasses_=toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	flag-o-matic	fd3558f73f6503093adee69adf41020d	multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	sysroot	4c36abaf94ebd3ab32f8abea9a444121	go-env	fca4e820393c2eac25a944be8bdf6a3a	go-module	3d4b6f3f29b3ebdeb708785b3cb1743b	systemd	a964c0cbe818b5729da1dbfcee5be861
+_md5_=2c0a142a70b264f9cc6df1d290d729dc
