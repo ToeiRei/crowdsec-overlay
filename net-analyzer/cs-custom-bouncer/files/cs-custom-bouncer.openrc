@@ -1,14 +1,34 @@
 #!/sbin/openrc-run
 
-command=/usr/bin/cs-custom-bouncer
-command_args="-c /etc/crowdsec/crowdsec-custom-bouncer.yaml"
-#pidfile=
-name="crowdsec"
-description="Crowdsec custom bouncer"
-command_background="yes"
-pidfile="/run/$RC_SVCNAME/$RC_SVCNAME.pid"
+name="CrowdSec custom bouncer"
+description="CrowdSec custom bouncer"
 
-start_pre () {
-  checkpath --directory --owner $command_user:$command_user --mode 0755 \
-  /run/$RC_SVCNAME
+bouncer_config="${bouncer_config:-/etc/crowdsec/crowdsec-custom-bouncer.yaml}"
+lapi_init_service="${lapi_init_service:-crowdsec}"
+
+command="/usr/bin/crowdsec-custom-bouncer"
+command_args="-c ${bouncer_config}"
+command_background=true
+pidfile="/run/${RC_SVCNAME}.pid"
+notify="socket:ready"
+required_files="${bouncer_config}"
+
+extra_commands="checkconfig"
+description_checkconfig="Validate the CrowdSec custom bouncer configuration"
+
+depend() {
+	if [ "${lapi_init_service}" != "none" ]; then
+		need "${lapi_init_service}"
+	fi
+}
+
+checkconfig() {
+	ebegin "Checking CrowdSec custom bouncer configuration"
+	"${command}" -c "${bouncer_config}" -t
+	eend $?
+}
+
+start_pre() {
+	rm -f "${RC_SVCDIR}/supervise-${RC_SVCNAME}.sock" || return 1
+	checkconfig
 }

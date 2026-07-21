@@ -1,14 +1,37 @@
 #!/sbin/openrc-run
 
-command=/usr/bin/crowdsec-cloudflare-bouncer
-command_args="-c /etc/crowdsec/crowdsec-cloudflare-bouncer.yaml"
-#pidfile=
-name="crowdsec"
-description="Crowdsec cloudflare bouncer"
-command_background="yes"
-pidfile="/run/$RC_SVCNAME/$RC_SVCNAME.pid"
+name="CrowdSec Cloudflare bouncer"
+description="CrowdSec Cloudflare bouncer"
 
-start_pre () {
-  checkpath --directory --owner $command_user:$command_user --mode 0755 \
-  /run/$RC_SVCNAME
+bouncer_config="${bouncer_config:-/etc/crowdsec/crowdsec-cloudflare-bouncer.yaml}"
+lapi_init_service="${lapi_init_service:-crowdsec}"
+
+command="/usr/bin/crowdsec-cloudflare-bouncer"
+command_args="-c ${bouncer_config}"
+command_background=true
+pidfile="/run/${RC_SVCNAME}.pid"
+notify="socket:ready"
+required_files="${bouncer_config}"
+
+extra_commands="checkconfig"
+description_checkconfig="Validate the CrowdSec Cloudflare bouncer configuration"
+
+depend() {
+	need net
+	if [ "${lapi_init_service}" != "none" ]; then
+		need "${lapi_init_service}"
+	fi
+}
+
+checkconfig() {
+	ebegin "Checking CrowdSec Cloudflare bouncer configuration"
+	"${command}" -c "${bouncer_config}" -t
+	eend $?
+}
+
+# The bouncer's -t path initializes Cloudflare workers. Run it only from
+# start_pre, after any previous bouncer process has stopped.
+start_pre() {
+	rm -f "${RC_SVCDIR}/supervise-${RC_SVCNAME}.sock" || return 1
+	checkconfig
 }
