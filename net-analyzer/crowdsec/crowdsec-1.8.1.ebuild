@@ -21,17 +21,9 @@ RESTRICT="mirror"
 
 DEPEND="
 	dev-libs/re2
-	>=dev-lang/go-1.23.6
+	dev-lang/go
 "
 RDEPEND="${DEPEND}"
-
-PATCHES=(
-	"${FILESDIR}/${P}-go-re2-cstring.patch"
-)
-
-src_prepare() {
-	default
-}
 
 src_unpack() {
 	default
