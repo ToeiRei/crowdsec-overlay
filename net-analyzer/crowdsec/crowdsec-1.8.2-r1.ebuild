@@ -49,10 +49,9 @@ src_install() {
 
 	# Plugins
 	exeinto /usr/lib/crowdsec/cmd
-	doexe cmd/notification-splunk/notification-splunk
-	doexe cmd/notification-slack/notification-slack
-	doexe cmd/notification-http/notification-http
-	doexe cmd/notification-email/notification-email
+	for name in $(basename --multiple cmd/notification-*); do
+		doexe cmd/${name}/${name}
+	done
 
 	# Config yamls
 	insinto /etc/crowdsec
@@ -74,10 +73,9 @@ src_install() {
 
 	# Notifications
 	insinto /etc/crowdsec/notifications
-	doins cmd/notification-splunk/splunk.yaml
-	doins cmd/notification-slack/slack.yaml
-	doins cmd/notification-http/http.yaml
-	doins cmd/notification-email/email.yaml
+	for name in $(basename --multiple cmd/notification-*); do
+		doins cmd/${name}/*.yaml
+	done
 
 	# crowdsec db location
 	keepdir /var/lib/crowdsec/data
